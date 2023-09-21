@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.portada{
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+}
+.barra-navegacion{
+    background-color: rgb(58, 58, 180);
+    width: 100%;
+    margin-top: 10px;
+}
+.barra-navegacion li{
+    display: flex;
+    justify-content: space-around;
+}
+.barra-navegacion a{   
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    
+}
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+.zapatillas {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.tarjeta{
+    border: solid 2px black;
+    border-radius: 7px;
+    height: 300px;
+    width: 30%;
+}
+.tarjeta img{
+    height: 50%;
+
+}
+
+.footer{
+    margin-top: 20px;
+    padding: 5px;
+    background-color: rgb(58, 58, 180);
+    color: white;
+    text-align: center;
+
+}

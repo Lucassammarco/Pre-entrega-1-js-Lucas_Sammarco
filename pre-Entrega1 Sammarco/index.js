@@ -1,4 +1,84 @@
-let suma = 0;
+function Producto(modelo, precio){
+    this.modelo = modelo;
+    this.precio = precio;
+}
+
+let zapatilla1 = new Producto("DC shoes", 10000);
+let zapatilla2 = new Producto("Vans", 9500);
+let zapatilla3 = new Producto("Element", 10500);
+
+let pant1 = new Producto("Jeans", 6000);
+let pant2 = new Producto("Joggis", 4000);
+let pant3 = new Producto("Bermudas", 5760);
+
+let diver1 = new Producto("Canguro", 15000);
+let diver2 = new Producto("Deportivos", 11000);
+let diver3 = new Producto("Buzo Campera", 17230);
+
+
+
+const shoes = [zapatilla1, zapatilla2, zapatilla3];
+
+console.table(shoes);
+
+const divers = [diver1, diver2, diver3];
+
+console.table(divers);
+
+const pants = [pant1, pant2, pant3];
+
+console.table(pants);
+
+let carrito = [];
+
+function suma(acumulador, actual) {
+    return acumulador + actual;
+}
+
+function SeleccionZ (opcion){
+    if (opcion == 1){
+      return carrito.push(zapatilla1.precio);
+    } else if (opcion == 2){
+        return carrito.push(zapatilla2.precio); 
+    } else if (opcion == 3){
+        return carrito.push(zapatilla3.precio); 
+    } 
+}
+
+function SeleccionPants (opcion){
+    if (opcion == 1){
+        return carrito.push(pant1.precio);
+      } else if (opcion == 2){
+          return carrito.push(pant2.precio); 
+      } else if (opcion == 3){
+          return carrito.push(pant3.precio); 
+      } 
+
+}
+
+function SeleccionBuzos (opcion){
+    if (opcion == 1){
+        return carrito.push(diver1.precio);
+      } else if (opcion == 2){
+          return carrito.push(diver2.precio); 
+      } else if (opcion == 3){
+          return carrito.push(diver3.precio); 
+      } 
+}
+
+
+function suma(acumulador, actual) {
+    return acumulador + actual;
+}
+
+let sumatoria = 0;
+
+let totalCarrito = carrito.reduce(suma, 0);
+
+console.log("llegamos bien");
+console.log(totalCarrito);
+
+
 
 alert ("Bienvenid@ a la tienda improvisada !");
 const nombre = prompt("como te llamas ? ");
@@ -6,42 +86,6 @@ const nombre = prompt("como te llamas ? ");
 alert ("Hola " + nombre + " en esta tienda encontraras una variedad de productos de tu interes");
 
 alert ("como esta tienda online aun se esta creando, te vamos a indicar los prodructos de forma numerica para que vos eligas el tipo de producto que quieras comprar");
-
-function SeleccionZ (opcion){
-    if (opcion == 1){
-        suma = suma + 10000;
-    } else if (opcion == 2){
-        suma = suma + 9500; 
-    } else if (opcion == 3){
-        suma = suma + 10500; 
-    }
-
-    return suma;
-}
-
-function SeleccionPants (opcion){
-    if (opcion == 1){
-        suma = suma + 6000;
-    } else if (opcion == 2){
-        suma = suma + 4000; 
-    } else if (opcion == 3){
-        suma = suma + 5760; 
-    }
-
-    return suma;
-}
-
-function SeleccionBuzos (opcion){
-    if (opcion == 1){
-        suma = suma + 15000;
-    } else if (opcion == 2){
-        suma = suma +11000; 
-    } else if (opcion == 3){
-        suma = suma + 17230; 
-    }
-
-    return suma;
-}
 
 let option = parseInt(prompt("opcion 1 = zapatillas, Opcion 2 = pantalones, Opcion 3 = Buzos, Precione '0' si no quiero comprar ningun producto.."));
 
@@ -51,23 +95,23 @@ while(option != 0){
     switch (option){
 
         case 1 : 
-            alert("Elgiste la opcion de zapatillas!, a continuacion le mostraremos los modelos y los precios de par de zapatillas, presione aceptar..");
+            alert("Elgiste la opcion de zapatillas!, a continuacion le mostraremos los modelos y los precios de los pares de zapatillas, presione aceptar..");
             do{
                 let modelo = parseInt(prompt("Opcion 1 = Modelo 'DC', Precio: $10.000 Opcion 2 = Modelo 'Vans', Precio: $9.500  Opcion 3 = Modelo: 'Element', Precio: $10.500"));
                 
 
                 SeleccionZ (modelo);
+                console.log(carrito);
 
-                console.log(suma);
+                var bucle = parseInt(prompt("desea continuar comprando Zapatillas? 1 = 'SI',  2 = Volver a las opciones anteriores"));
 
-                alert("llevas gastando " + suma);
-
-                var bucle = parseInt(prompt("desea continuar comprando? 1 = 'SI',  2 = Volver a las opciones anteriores"));
-
-                console.log(bucle);
 
             }while(bucle == 1);
             
+            totalCarrito = carrito.reduce(suma, 0);
+
+            alert("llevas gastando: " + totalCarrito);
+
             break;
         
         case 2 : 
@@ -77,17 +121,18 @@ while(option != 0){
                 var modelo = parseInt(prompt("Opcion 1 = Modelo 'Jeans', Precio: $6.000 Opcion 2 = Modelo 'joggis', Precio: $4.000  Opcion 3 = Modelo: 'bermudas', Precio: $5.760"));
 
                 SeleccionPants(modelo);
-
-                console.log(suma);
-
-                alert("llevas gastando " + suma);
+                console.log(carrito);
+                
 
                 var bucle = parseInt(prompt("desea continuar comprando pantalones? 1 = 'SI',  2 = 'volver a las opciones anteriores' "));
-
-                console.log(bucle);
                 
 
             }while(bucle == 1);
+
+
+            totalCarrito = carrito.reduce(suma, 0);
+
+            alert("llevas gastando: " + totalCarrito);
 
             break;
 
@@ -98,17 +143,18 @@ while(option != 0){
                 var modelo = parseInt(prompt("Opcion 1 = Modelo 'Canguro', Precio: $15.000 Opcion 2 = Modelo 'Deportivos', Precio: $11.000  Opcion 3 = Modelo: 'Buzo campera', Precio: $17.230"));
 
                 SeleccionBuzos(modelo);
-
-                console.log(suma);
-
-                alert("llevas gastando " + suma);
+                console.log(carrito);
+                
 
                 var bucle = parseInt(prompt("desea continuar comprando buzos? 1 = 'SI',  2 = 'volver a las opciones anteriores' "));
-
-                console.log(bucle);
                 
 
             }while(bucle == 1);
+
+            totalCarrito = carrito.reduce(suma, 0);
+
+            alert("llevas gastando: " + totalCarrito);
+
             break;
 
             default: 
@@ -125,7 +171,7 @@ while(option != 0){
 
 console.log(option);
 
-alert("De acuerdo la suma total es de: $" + suma  + " presiona 'aceptar' para ingresar al carro del compra y realizar el pago!!");
+alert("De acuerdo la suma total es de: $" + totalCarrito  + " presiona 'aceptar' para ingresar al carro del compra y realizar el pago!!");
 
 alert(" Ohhhh!! :C , lo sentimos!, Aun no pudimos contruir el area del carrito, pero pronto lo Haremos!!!, Gracias por su compra! ");
 
