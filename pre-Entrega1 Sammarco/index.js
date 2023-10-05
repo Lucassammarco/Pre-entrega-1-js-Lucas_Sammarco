@@ -1,179 +1,155 @@
-function Producto(modelo, precio){
-    this.modelo = modelo;
-    this.precio = precio;
-}
+function generarTarjetas(datos, id_tarjetas,familia) {
+    const contenedorTarjetas = document.getElementById(id_tarjetas);
 
-let zapatilla1 = new Producto("DC shoes", 10000);
-let zapatilla2 = new Producto("Vans", 9500);
-let zapatilla3 = new Producto("Element", 10500);
+    for (let i = 1; i <= datos.length; i++) {
+        const tarjeta = datos[i - 1];
 
-let pant1 = new Producto("Jeans", 6000);
-let pant2 = new Producto("Joggis", 4000);
-let pant3 = new Producto("Bermudas", 5760);
+        const nuevaTarjeta = document.createElement('div');
+        nuevaTarjeta.classList.add('tarjeta');
+        nuevaTarjeta.id = id_tarjetas + `${i}`;
 
-let diver1 = new Producto("Canguro", 15000);
-let diver2 = new Producto("Deportivos", 11000);
-let diver3 = new Producto("Buzo Campera", 17230);
+        nuevaTarjeta.innerHTML = `
+            <img src="${tarjeta.imagen}" alt="${tarjeta.nombre}">
+            <div class="datos_tarjeta1">
+                <h3>${tarjeta.nombre}</h3>
+                <p>Precio : $${tarjeta.precio}</p>
+            </div>
+            <div class="datos_tarjeta2">
+                <label for="cant_${familia}${i}">cant:</label>
+                <input type="number" id="cant_${familia}${i}" class="selector">
+                <button type="button" class="btn" id="${familia}${i}">Agregar</button>
+            </div>
+        `;
 
+        contenedorTarjetas.appendChild(nuevaTarjeta);
 
+        // Agregar evento clic al boton "Agregar" de la tarjeta actual
+        const botonAgregar = document.getElementById(`${familia}${i}`);
+        botonAgregar.addEventListener('click',  () => {
+            const cantidad = parseInt(document.getElementById(`cant_${familia}${i}`).value);
+            const producto = { nombre: tarjeta.nombre, imagen: tarjeta.imagen, precio: tarjeta.precio, cantidad };
 
-const shoes = [zapatilla1, zapatilla2, zapatilla3];
-
-console.table(shoes);
-
-const divers = [diver1, diver2, diver3];
-
-console.table(divers);
-
-const pants = [pant1, pant2, pant3];
-
-console.table(pants);
-
-let carrito = [];
-
-function suma(acumulador, actual) {
-    return acumulador + actual;
-}
-
-function SeleccionZ (opcion){
-    if (opcion == 1){
-      return carrito.push(zapatilla1.precio);
-    } else if (opcion == 2){
-        return carrito.push(zapatilla2.precio); 
-    } else if (opcion == 3){
-        return carrito.push(zapatilla3.precio); 
-    } 
-}
-
-function SeleccionPants (opcion){
-    if (opcion == 1){
-        return carrito.push(pant1.precio);
-      } else if (opcion == 2){
-          return carrito.push(pant2.precio); 
-      } else if (opcion == 3){
-          return carrito.push(pant3.precio); 
-      } 
-
-}
-
-function SeleccionBuzos (opcion){
-    if (opcion == 1){
-        return carrito.push(diver1.precio);
-      } else if (opcion == 2){
-          return carrito.push(diver2.precio); 
-      } else if (opcion == 3){
-          return carrito.push(diver3.precio); 
-      } 
-}
-
-
-function suma(acumulador, actual) {
-    return acumulador + actual;
-}
-
-let sumatoria = 0;
-
-let totalCarrito = carrito.reduce(suma, 0);
-
-console.log("llegamos bien");
-console.log(totalCarrito);
-
-
-
-alert ("Bienvenid@ a la tienda improvisada !");
-const nombre = prompt("como te llamas ? ");
-
-alert ("Hola " + nombre + " en esta tienda encontraras una variedad de productos de tu interes");
-
-alert ("como esta tienda online aun se esta creando, te vamos a indicar los prodructos de forma numerica para que vos eligas el tipo de producto que quieras comprar");
-
-let option = parseInt(prompt("opcion 1 = zapatillas, Opcion 2 = pantalones, Opcion 3 = Buzos, Precione '0' si no quiero comprar ningun producto.."));
-
-console.log(option);
-
-while(option != 0){
-    switch (option){
-
-        case 1 : 
-            alert("Elgiste la opcion de zapatillas!, a continuacion le mostraremos los modelos y los precios de los pares de zapatillas, presione aceptar..");
-            do{
-                let modelo = parseInt(prompt("Opcion 1 = Modelo 'DC', Precio: $10.000 Opcion 2 = Modelo 'Vans', Precio: $9.500  Opcion 3 = Modelo: 'Element', Precio: $10.500"));
-                
-
-                SeleccionZ (modelo);
-                console.log(carrito);
-
-                var bucle = parseInt(prompt("desea continuar comprando Zapatillas? 1 = 'SI',  2 = Volver a las opciones anteriores"));
-
-
-            }while(bucle == 1);
-            
-            totalCarrito = carrito.reduce(suma, 0);
-
-            alert("llevas gastando: " + totalCarrito);
-
-            break;
-        
-        case 2 : 
-            alert("Elgiste la opcion de Pantalones!, a continuacion le mostraremos los modelos y los precios de par de Pantalones, presione aceptar..");
-
-            do{
-                var modelo = parseInt(prompt("Opcion 1 = Modelo 'Jeans', Precio: $6.000 Opcion 2 = Modelo 'joggis', Precio: $4.000  Opcion 3 = Modelo: 'bermudas', Precio: $5.760"));
-
-                SeleccionPants(modelo);
-                console.log(carrito);
-                
-
-                var bucle = parseInt(prompt("desea continuar comprando pantalones? 1 = 'SI',  2 = 'volver a las opciones anteriores' "));
-                
-
-            }while(bucle == 1);
-
-
-            totalCarrito = carrito.reduce(suma, 0);
-
-            alert("llevas gastando: " + totalCarrito);
-
-            break;
-
-            case 3 : 
-            alert("Elgiste la opcion de Buzos!, a continuacion le mostraremos los modelos y los precios de par de Buzos, presione aceptar..");
-
-            do{
-                var modelo = parseInt(prompt("Opcion 1 = Modelo 'Canguro', Precio: $15.000 Opcion 2 = Modelo 'Deportivos', Precio: $11.000  Opcion 3 = Modelo: 'Buzo campera', Precio: $17.230"));
-
-                SeleccionBuzos(modelo);
-                console.log(carrito);
-                
-
-                var bucle = parseInt(prompt("desea continuar comprando buzos? 1 = 'SI',  2 = 'volver a las opciones anteriores' "));
-                
-
-            }while(bucle == 1);
-
-            totalCarrito = carrito.reduce(suma, 0);
-
-            alert("llevas gastando: " + totalCarrito);
-
-            break;
-
-            default: 
-                    alert("Ingrese una opcion valida!!");
-                    break;
-
-           
-
-
+            // Agregar el producto al carrito
+            agregarAlCarrito(producto);
+            alert("se agrego con exito al carrito al carrito");
+        });
     }
-    alert("Bien, que desea hacer? ");
-    option = parseInt(prompt("opcion 1 = zapatillas, Opcion 2 = pantalones, Opcion 3 = Buzos, Precione '0' ya no quiero comprar mas productos.."));
+}
+// Función para borrar la Local Storage
+function borrarLocalStorage() {
+    localStorage.clear(); 
+    alert('El carrito ah sido borrado.'); 
+    location.reload();
+}
+function sumarPreciosCarrito() {
+    // se obtiene el carrito desde el localstorage y se convierte de JSON a obj
+    const carrito = localStorage.carrito ? JSON.parse(localStorage.carrito) : [];
+
+    // inicializacion del total,(se utiliza como sumador)
+    let total = 0;
+
+    
+    carrito.forEach(producto => {
+        total += parseInt(producto.precio) * producto.cantidad;
+    });
+
+    //  se devuelve el total
+    return total;
 }
 
-console.log(option);
+// funcion para agregar productos al carrito
+function agregarAlCarrito(producto) {
+    // Verificar si el carrito ya existe en localStorage
+    const carrito = localStorage.carrito ? JSON.parse(localStorage.carrito) : [];
 
-alert("De acuerdo la suma total es de: $" + totalCarrito  + " presiona 'aceptar' para ingresar al carro del compra y realizar el pago!!");
+    // Agregar el nuevo producto al carrito
+    carrito.push(producto);
 
-alert(" Ohhhh!! :C , lo sentimos!, Aun no pudimos contruir el area del carrito, pero pronto lo Haremos!!!, Gracias por su compra! ");
+    // Guardar el carrito actualizado en localStorage como JSON
+    localStorage.carrito = JSON.stringify(carrito);
+
+    // Mensaje de confirmacion
+    console.log('Producto agregado al carrito:', producto);
+}
+
+// Datos y llamada para zapatillas
+const datos_zapatilla = [
+    { nombre: "Vans", imagen: "./multimedia/zapatillaVans.webp", precio: "9500" },
+    { nombre: "DC", imagen: "./multimedia/zapatillasDC.webp", precio: "10000" },
+    { nombre: "Element", imagen: "./multimedia/zapatillasElement", precio: "10500" }
+];
+
+generarTarjetas(datos_zapatilla, 'contenedorZapatillas','zapatillas');
+
+// Datos y llamada para Pantalones
+const datos_pantalones = [
+    { nombre: "Jeans", imagen: "./multimedia/pantalonesJeans", precio: "6000" },
+    { nombre: "Joggis", imagen: "./multimedia/pantalonesJoggings", precio: "4000" },
+    { nombre: "Bermudas", imagen: "./multimedia/bermuda", precio: "5760" }
+];
+
+generarTarjetas(datos_pantalones, 'contenedorPantalones','pantalones');
+
+// Datos y llamada para buzos
+const datos_Buzos = [
+    { nombre: "Canguro", imagen: "./multimedia/canguro", precio: "9500" },
+    { nombre: "Deportivo", imagen: "./multimedia/deportivo", precio: "10000" },
+    { nombre: "Buzo Campera", imagen: "./multimedia/buzoCampera", precio: "10500" }
+];
+
+generarTarjetas(datos_Buzos, 'contenedorBuzos', 'buzos');
+
+
+//  funcion para bbtener el carrito desde el almacenamiento local y convertirlo de JSON a objeto
+function mostrarCarrito() {
+    
+    const carrito = localStorage.carrito ? JSON.parse(localStorage.carrito) : [];
+
+    // Construir una cadena de texto con los elementos del carrito
+    let carritoHTML = '<ul>';
+    carrito.forEach(producto => {
+        carritoHTML += `<li>${producto.nombre} - Precio: $${producto.precio} - Cantidad: ${producto.cantidad}</li>`;
+    });
+    carritoHTML += '</ul>';
+
+    // Mostrar la cadena de texto en el elemento con el id "carrito"
+    const carritoElemento = document.getElementById('carritoContenedor');
+    carritoElemento.innerHTML = carritoHTML;
+}
+    //REaccion del evento 'click' del boton
+document.getElementById('botonCarrito').addEventListener('click', () => {
+    // se obtiene el elemento con el id "carrito"
+    const carritoElemento = document.getElementById('carritoContenedor');
+
+        // aca se verifica si el carrito tiene la clase "activado"
+    if (carritoElemento.classList.contains('activado')) {
+        // Si tiene la clase 'activado', se le  cambia a "desactivado"
+
+        carritoElemento.classList.remove('activado');
+        carritoElemento.classList.add('desactivado');
+    } else {
+        // Si no tiene la clase "activado", se lo cambia a "activado"
+        carritoElemento.classList.remove('desactivado');
+        carritoElemento.classList.add('activado');
+        mostrarCarrito()
+
+        // funcion para obtener la suma de precios del carrito
+        const totalCarrito = sumarPreciosCarrito();
+
+        // Se muestra el total del carrito por consola
+        console.log(`Total del carrito: $${totalCarrito}`);
+    }
+});
+
+
+
+
+
+const botonBorrarLocalStorage = document.getElementById('botonBorrarLocalStorage');
+
+
+botonBorrarLocalStorage.addEventListener('click', borrarLocalStorage);
+
 
 
 

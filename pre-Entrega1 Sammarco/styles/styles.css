@@ -36,16 +36,59 @@
     display: flex;
     justify-content: space-evenly;
 }
+.desactivado{
+    display: none !important;
+}
+.activado{
+    display: block !important;
+}
+.carrito{
+   border:solid 2px;
+   border-color: blue;
+  min-height: 2rem;
+   
+}
+.botonCarrito{
 
+}
 .tarjeta{
     border: solid 2px black;
     border-radius: 7px;
-    height: 300px;
+    height: 380px;
     width: 30%;
+    background-color: rgba(165, 157, 147, 0.336);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+
 }
 .tarjeta img{
-    height: 50%;
+    height: 80%;
+    width: 100%;
+    border-radius: 7px;
+    border-bottom: solid 2px black;
 
+}
+
+.datos_tarjeta1{
+    display: flex;
+    flex-direction: column;
+}
+
+.datos_tarjeta2{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+}
+
+.btn{
+    background-color: rgb(92, 197, 92);
+    color: white;
+    padding: 2px;
+    border-radius: 5px;
+}
+.selector{
+    width: 40px;
 }
 
 .footer{
